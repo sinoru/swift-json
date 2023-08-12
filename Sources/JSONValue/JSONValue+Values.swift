@@ -17,7 +17,7 @@ extension JSONValue {
             }
         }
         set {
-            if let newValue {
+            if let newValue = newValue {
                 self = .object(newValue)
             }
         }
@@ -36,7 +36,7 @@ extension JSONValue {
             }
         }
         set {
-            if let newValue {
+            if let newValue = newValue {
                 self = .array(newValue)
             }
         }
@@ -55,7 +55,7 @@ extension JSONValue {
             }
         }
         set {
-            if let newValue {
+            if let newValue = newValue {
                 self = .string(newValue)
             }
         }
@@ -74,7 +74,7 @@ extension JSONValue {
             }
         }
         set {
-            if let newValue {
+            if let newValue = newValue {
                 self = .number(newValue)
             }
         }
@@ -93,7 +93,7 @@ extension JSONValue {
             }
         }
         set {
-            if let newValue {
+            if let newValue = newValue {
                 self = .bool(newValue)
             }
         }

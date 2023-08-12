@@ -33,7 +33,7 @@ extension JSONValue {
         set {
             var arrayValue = self.arrayValue ?? []
 
-            if let newValue {
+            if let newValue = newValue {
                 arrayValue[index] = newValue
             } else {
                 arrayValue.remove(at: index)
