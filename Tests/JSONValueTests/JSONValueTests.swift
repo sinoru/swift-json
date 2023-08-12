@@ -1,12 +1,11 @@
+//
+//  JSONValueTests.swift
+//  
+//
+//  Created by Jaehong Kang on 8/12/23.
+//
+
 import XCTest
 @testable import JSONValue
 
-final class JSONValueTests: XCTestCase {
-    func testExample() throws {
-        // XCTest Documenation
-        // https://developer.apple.com/documentation/xctest
-
-        // Defining Test Cases and Test Methods
-        // https://developer.apple.com/documentation/xctest/defining_test_cases_and_test_methods
-    }
-}
+final class JSONValueTests: XCTestCase { }
