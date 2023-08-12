@@ -1,0 +1,50 @@
+name: Test
+
+on:
+  push:
+    paths:
+      - '.github/workflows/test.yml'
+      - '**/*.swift'
+  pull_request:
+    paths:
+      - '.github/workflows/test.yml'
+      - '**/*.swift'
+
+jobs:
+  swift-test:
+    strategy:
+      fail-fast: true
+      matrix:
+        operating-system: ["ubuntu-20.04", "ubuntu-22.04"]
+        swift-version: ["5.6.3", "5.7.3", "5.8.1"]
+        exclude:
+          - swift-version: "5.6.3"
+            operating-system: "ubuntu-22.04"
+    uses: shizukusoft/workflows/.github/workflows/swift-test.yml@main
+    with:
+      runs-on: ${{ matrix.operating-system }}
+      swift-version: ${{ matrix.swift-version }}
+
+  xcode-test:
+    strategy:
+      fail-fast: true
+      matrix:
+        xcode-version: ["13.4.1", "14.3.1"]
+        xcode-destination: [
+          "platform=OS X,arch=x86_64",
+          "platform=OS X,arch=x86_64,variant=Mac Catalyst",
+          "platform=iOS Simulator,name=iPhone 12 Pro,OS=latest",
+          "platform=tvOS Simulator,name=Apple TV,OS=latest",
+          "platform=watchOS Simulator,name=Apple Watch Series 6 - 44mm,OS=latest",
+        ]
+        include:
+          - xcode-version: "13.4.1"
+            operating-system: "macos-12"
+          - xcode-version: "14.3.1"
+            operating-system: "macos-13"
+    uses: shizukusoft/workflows/.github/workflows/xcode-test.yml@main
+    with:
+      runs-on: ${{ matrix.operating-system }}
+      xcode-version: ${{ matrix.xcode-version }}
+      xcode-destination: ${{ matrix.xcode-destination }}
+      xcode-scheme: swift-json-value
