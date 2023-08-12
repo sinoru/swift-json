@@ -6,6 +6,7 @@
 //
 
 extension JSONValue {
+    @inlinable
     public var objectValue: Object? {
         get {
             switch self {
@@ -24,6 +25,7 @@ extension JSONValue {
 }
 
 extension JSONValue {
+    @inlinable
     public var arrayValue: Array? {
         get {
             switch self {
@@ -42,6 +44,7 @@ extension JSONValue {
 }
 
 extension JSONValue {
+    @inlinable
     public var stringValue: String? {
         get {
             switch self {
@@ -60,6 +63,7 @@ extension JSONValue {
 }
 
 extension JSONValue {
+    @inlinable
     public var numberValue: Number? {
         get {
             switch self {
@@ -78,6 +82,7 @@ extension JSONValue {
 }
 
 extension JSONValue {
+    @inlinable
     public var boolValue: Bool? {
         get {
             switch self {
@@ -96,6 +101,7 @@ extension JSONValue {
 }
 
 extension JSONValue {
+    @inlinable
     public var isNull: Bool {
         get {
             switch self {
