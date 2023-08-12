@@ -1,7 +1,7 @@
 import XCTest
-@testable import swift_json_value
+@testable import JSONValue
 
-final class swift_json_valueTests: XCTestCase {
+final class JSONValueTests: XCTestCase {
     func testExample() throws {
         // XCTest Documenation
         // https://developer.apple.com/documentation/xctest
