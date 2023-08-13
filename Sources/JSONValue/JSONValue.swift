@@ -8,7 +8,7 @@
 import Foundation
 
 @frozen
-public enum JSONValue {
+public enum JSONValue: Sendable {
     public typealias Object = [String: JSONValue]
     public typealias Array = [JSONValue]
     public typealias Number = Decimal
