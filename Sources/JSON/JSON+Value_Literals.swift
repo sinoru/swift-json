@@ -1,13 +1,13 @@
 //
-//  JSONValue+Literals.swift
+//  JSON+Value_Literals.swift
 //
 //
 //  Created by Jaehong Kang on 8/12/23.
 //
 
-extension JSONValue: ExpressibleByDictionaryLiteral {
-    public typealias Key = Object.Key
-    public typealias Value = Object.Value
+extension JSON.Value: ExpressibleByDictionaryLiteral {
+    public typealias Key = JSON.Object.Key
+    public typealias Value = JSON.Object.Value
 
     @inlinable
     public init(dictionaryLiteral elements: (Key, Value)...) {
@@ -15,8 +15,8 @@ extension JSONValue: ExpressibleByDictionaryLiteral {
     }
 }
 
-extension JSONValue: ExpressibleByArrayLiteral {
-    public typealias ArrayLiteralElement = Array.Element
+extension JSON.Value: ExpressibleByArrayLiteral {
+    public typealias ArrayLiteralElement = JSON.Array.Element
 
     @inlinable
     public init(arrayLiteral elements: ArrayLiteralElement...) {
@@ -24,7 +24,7 @@ extension JSONValue: ExpressibleByArrayLiteral {
     }
 }
 
-extension JSONValue: ExpressibleByStringLiteral {
+extension JSON.Value: ExpressibleByStringLiteral {
     public typealias StringLiteralType = String.StringLiteralType
 
     @inlinable
@@ -33,8 +33,8 @@ extension JSONValue: ExpressibleByStringLiteral {
     }
 }
 
-extension JSONValue: ExpressibleByIntegerLiteral {
-    public typealias IntegerLiteralType = Number.IntegerLiteralType
+extension JSON.Value: ExpressibleByIntegerLiteral {
+    public typealias IntegerLiteralType = JSON.Number.IntegerLiteralType
 
     @inlinable
     public init(integerLiteral value: IntegerLiteralType) {
@@ -42,16 +42,16 @@ extension JSONValue: ExpressibleByIntegerLiteral {
     }
 }
 
-extension JSONValue: ExpressibleByFloatLiteral {
-    public typealias FloatLiteralType = Number.FloatLiteralType
+extension JSON.Value: ExpressibleByFloatLiteral {
+    public typealias FloatLiteralType = JSON.Number.FloatLiteralType
 
     @inlinable
-    public init(floatLiteral value: Number.FloatLiteralType) {
+    public init(floatLiteral value: JSON.Number.FloatLiteralType) {
         self = .number(.init(floatLiteral: value))
     }
 }
 
-extension JSONValue: ExpressibleByBooleanLiteral {
+extension JSON.Value: ExpressibleByBooleanLiteral {
     public typealias BooleanLiteralType = Bool.BooleanLiteralType
 
     @inlinable
@@ -60,7 +60,7 @@ extension JSONValue: ExpressibleByBooleanLiteral {
     }
 }
 
-extension JSONValue: ExpressibleByNilLiteral {
+extension JSON.Value: ExpressibleByNilLiteral {
     @inlinable
     public init(nilLiteral: ()) {
         self = .null

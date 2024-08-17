@@ -1,5 +1,5 @@
 //
-//  JSONValueTests+Decodable.swift
+//  JSONTests+Value_Decodable.swift
 //
 //
 //  Created by Jaehong Kang on 8/12/23.
@@ -36,7 +36,7 @@ extension JSONValueTests {
         """#
 
         let jsonDecoder = JSONDecoder()
-        let jsonValue = try jsonDecoder.decode(JSONValue.self, from: Data(jsonString.utf8))
+        let jsonValue = try jsonDecoder.decode(JSON.Value.self, from: Data(jsonString.utf8))
 
         XCTAssertEqual(
             jsonValue,

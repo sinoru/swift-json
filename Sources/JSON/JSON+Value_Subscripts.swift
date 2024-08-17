@@ -1,13 +1,13 @@
 //
-//  JSONValue+Subscripts.swift
+//  JSON+Value_Subscripts.swift
 //
 //
 //  Created by Jaehong Kang on 8/12/23.
 //
 
-extension JSONValue {
+extension JSON.Value {
     @inlinable
-    public subscript(key: Object.Key) -> Object.Value? {
+    public subscript(key: JSON.Object.Key) -> JSON.Object.Value? {
         get {
             self.object?[key]
         }
@@ -26,7 +26,7 @@ extension JSONValue {
     }
 
     @inlinable
-    public subscript(index: Int) -> Array.Element? {
+    public subscript(index: Int) -> JSON.Array.Element? {
         get {
             self.array?[index]
         }
@@ -44,7 +44,7 @@ extension JSONValue {
     }
 
     @inlinable
-    public subscript(bounds: Range<Int>) -> ArraySlice<Array.Element>? {
+    public subscript(bounds: Range<Int>) -> JSON.Array.SubSequence? {
         self.array?[bounds]
     }
 }
