@@ -1,5 +1,5 @@
 //
-//  JSONValue+Decodable.swift
+//  JSON+Decodable.swift
 //
 //
 //  Created by Jaehong Kang on 8/12/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension JSONValue: Decodable {
+extension JSON: Decodable {
     @inlinable
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

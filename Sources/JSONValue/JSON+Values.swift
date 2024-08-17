@@ -1,13 +1,13 @@
 //
-//  JSONValue+Values.swift
+//  JSON+Values.swift
 //
 //
 //  Created by Jaehong Kang on 8/12/23.
 //
 
-extension JSONValue {
+extension JSON {
     @inlinable
-    public var objectValue: Object? {
+    public var object: Object? {
         get {
             switch self {
             case .object(let object):
@@ -24,9 +24,9 @@ extension JSONValue {
     }
 }
 
-extension JSONValue {
+extension JSON {
     @inlinable
-    public var arrayValue: Array? {
+    public var array: Array? {
         get {
             switch self {
             case .array(let array):
@@ -43,9 +43,9 @@ extension JSONValue {
     }
 }
 
-extension JSONValue {
+extension JSON {
     @inlinable
-    public var stringValue: String? {
+    public var string: String? {
         get {
             switch self {
             case .string(let string):
@@ -62,9 +62,9 @@ extension JSONValue {
     }
 }
 
-extension JSONValue {
+extension JSON {
     @inlinable
-    public var numberValue: Number? {
+    public var number: Number? {
         get {
             switch self {
             case .number(let number):
@@ -81,9 +81,9 @@ extension JSONValue {
     }
 }
 
-extension JSONValue {
+extension JSON {
     @inlinable
-    public var boolValue: Bool? {
+    public var bool: Bool? {
         get {
             switch self {
             case .bool(let bool):
@@ -100,7 +100,7 @@ extension JSONValue {
     }
 }
 
-extension JSONValue {
+extension JSON {
     @inlinable
     public var isNull: Bool {
         get {

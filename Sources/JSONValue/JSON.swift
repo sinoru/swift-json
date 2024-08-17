@@ -1,5 +1,5 @@
 //
-//  JSONValue.swift
+//  JSON.swift
 //
 //
 //  Created by Jaehong Kang on 8/12/23.
@@ -8,9 +8,9 @@
 import Foundation
 
 @frozen
-public enum JSONValue: Sendable {
-    public typealias Object = [String: JSONValue]
-    public typealias Array = [JSONValue]
+public enum JSON: Sendable {
+    public typealias Object = [String: JSON]
+    public typealias Array = [JSON]
     public typealias Number = Decimal
 
     case object(Object)
@@ -21,5 +21,5 @@ public enum JSONValue: Sendable {
     case null
 }
 
-extension JSONValue: Equatable { }
-extension JSONValue: Hashable { }
+extension JSON: Equatable { }
+extension JSON: Hashable { }

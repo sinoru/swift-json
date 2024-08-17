@@ -1,22 +1,22 @@
 //
-//  JSONValue+Subscripts.swift
+//  JSON+Subscripts.swift
 //
 //
 //  Created by Jaehong Kang on 8/12/23.
 //
 
-extension JSONValue {
+extension JSON {
     @inlinable
     public subscript(key: Object.Key) -> Object.Value? {
         get {
-            self.objectValue?[key]
+            self.object?[key]
         }
         set {
-            var objectValue = self.objectValue ?? [:]
+            var objectValue = self.object ?? [:]
 
             objectValue[key] = newValue
 
-            self.objectValue = objectValue
+            self.object = objectValue
         }
     }
 
@@ -28,10 +28,10 @@ extension JSONValue {
     @inlinable
     public subscript(index: Int) -> Array.Element? {
         get {
-            self.arrayValue?[index]
+            self.array?[index]
         }
         set {
-            var arrayValue = self.arrayValue ?? []
+            var arrayValue = self.array ?? []
 
             if let newValue = newValue {
                 arrayValue[index] = newValue
@@ -39,12 +39,12 @@ extension JSONValue {
                 arrayValue.remove(at: index)
             }
 
-            self.arrayValue = arrayValue
+            self.array = arrayValue
         }
     }
 
     @inlinable
     public subscript(bounds: Range<Int>) -> ArraySlice<Array.Element>? {
-        self.arrayValue?[bounds]
+        self.array?[bounds]
     }
 }

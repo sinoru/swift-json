@@ -1,5 +1,5 @@
 //
-//  JSONValue+Literals.swift
+//  JSON+Literals.swift
 //
 //
 //  Created by Jaehong Kang on 8/12/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension JSONValue: ExpressibleByDictionaryLiteral {
+extension JSON: ExpressibleByDictionaryLiteral {
     public typealias Key = Object.Key
     public typealias Value = Object.Value
 
@@ -17,7 +17,7 @@ extension JSONValue: ExpressibleByDictionaryLiteral {
     }
 }
 
-extension JSONValue: ExpressibleByArrayLiteral {
+extension JSON: ExpressibleByArrayLiteral {
     public typealias ArrayLiteralElement = Array.Element
 
     @inlinable
@@ -26,7 +26,7 @@ extension JSONValue: ExpressibleByArrayLiteral {
     }
 }
 
-extension JSONValue: ExpressibleByStringLiteral {
+extension JSON: ExpressibleByStringLiteral {
     public typealias StringLiteralType = String.StringLiteralType
 
     @inlinable
@@ -35,7 +35,7 @@ extension JSONValue: ExpressibleByStringLiteral {
     }
 }
 
-extension JSONValue: ExpressibleByIntegerLiteral {
+extension JSON: ExpressibleByIntegerLiteral {
     public typealias IntegerLiteralType = Number.IntegerLiteralType
 
     @inlinable
@@ -44,7 +44,7 @@ extension JSONValue: ExpressibleByIntegerLiteral {
     }
 }
 
-extension JSONValue: ExpressibleByFloatLiteral {
+extension JSON: ExpressibleByFloatLiteral {
     public typealias FloatLiteralType = Number.FloatLiteralType
 
     @inlinable
@@ -53,7 +53,7 @@ extension JSONValue: ExpressibleByFloatLiteral {
     }
 }
 
-extension JSONValue: ExpressibleByBooleanLiteral {
+extension JSON: ExpressibleByBooleanLiteral {
     public typealias BooleanLiteralType = Bool.BooleanLiteralType
 
     @inlinable
@@ -62,7 +62,7 @@ extension JSONValue: ExpressibleByBooleanLiteral {
     }
 }
 
-extension JSONValue: ExpressibleByNilLiteral {
+extension JSON: ExpressibleByNilLiteral {
     @inlinable
     public init(nilLiteral: ()) {
         self = .null
