@@ -5,8 +5,6 @@
 //  Created by Jaehong Kang on 8/12/23.
 //
 
-import Foundation
-
 extension JSON: Encodable {
     @inlinable
     public func encode(to encoder: Encoder) throws {

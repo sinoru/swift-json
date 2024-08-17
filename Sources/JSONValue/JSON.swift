@@ -5,7 +5,11 @@
 //  Created by Jaehong Kang on 8/12/23.
 //
 
-import Foundation
+#if canImport(FoundationEssentials)
+@_exported import struct FoundationEssentials.Decimal
+#else
+@_exported import struct Foundation.Decimal
+#endif
 
 @frozen
 public enum JSON: Sendable {

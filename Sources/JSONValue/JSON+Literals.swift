@@ -5,8 +5,6 @@
 //  Created by Jaehong Kang on 8/12/23.
 //
 
-import Foundation
-
 extension JSON: ExpressibleByDictionaryLiteral {
     public typealias Key = Object.Key
     public typealias Value = Object.Value
