@@ -1,5 +1,5 @@
 //
-//  JSONValue+Decodable.swift
+//  JSON+Value_Decodable.swift
 //
 //
 //  Created by Jaehong Kang on 8/12/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension JSONValue: Decodable {
+extension JSON.Value: Decodable {
     @inlinable
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
@@ -15,7 +15,7 @@ extension JSONValue: Decodable {
         var errors = [Error]()
 
         do {
-            let object = try container.decode(Object.self)
+            let object = try container.decode(JSON.Object.self)
 
             self = .object(object)
             return
@@ -24,7 +24,7 @@ extension JSONValue: Decodable {
         }
 
         do {
-            let array = try container.decode(Array.self)
+            let array = try container.decode(JSON.Array.self)
 
             self = .array(array)
             return
@@ -42,7 +42,7 @@ extension JSONValue: Decodable {
         }
 
         do {
-            let number = try container.decode(Number.self)
+            let number = try container.decode(JSON.Number.self)
 
             self = .number(number)
             return

@@ -6,6 +6,6 @@
 //
 
 import XCTest
-@testable import JSONValue
+@testable import JSON
 
 final class JSONValueTests: XCTestCase { }
