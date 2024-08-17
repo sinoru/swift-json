@@ -1,11 +1,11 @@
 //
-//  JSON+Values.swift
+//  JSONValue+Values.swift
 //
 //
 //  Created by Jaehong Kang on 8/12/23.
 //
 
-extension JSON {
+extension JSONValue {
     @inlinable
     public var object: Object? {
         get {
@@ -24,7 +24,7 @@ extension JSON {
     }
 }
 
-extension JSON {
+extension JSONValue {
     @inlinable
     public var array: Array? {
         get {
@@ -43,7 +43,7 @@ extension JSON {
     }
 }
 
-extension JSON {
+extension JSONValue {
     @inlinable
     public var string: String? {
         get {
@@ -62,7 +62,7 @@ extension JSON {
     }
 }
 
-extension JSON {
+extension JSONValue {
     @inlinable
     public var number: Number? {
         get {
@@ -81,7 +81,7 @@ extension JSON {
     }
 }
 
-extension JSON {
+extension JSONValue {
     @inlinable
     public var bool: Bool? {
         get {
@@ -100,7 +100,7 @@ extension JSON {
     }
 }
 
-extension JSON {
+extension JSONValue {
     @inlinable
     public var isNull: Bool {
         get {

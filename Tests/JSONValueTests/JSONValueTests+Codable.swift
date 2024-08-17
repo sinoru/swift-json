@@ -1,5 +1,5 @@
 //
-//  JSONTests+Codable.swift
+//  JSONValueTests+Codable.swift
 //
 //
 //  Created by Jaehong Kang on 8/12/23.
@@ -8,9 +8,9 @@
 import XCTest
 @testable import JSONValue
 
-extension JSONTests {
+extension JSONValueTests {
     func testCodable() throws {
-        let jsonValueForEncocable: JSON = [
+        let jsonValueForEncocable: JSONValue = [
             "glossary": [
                 "title": "example glossary",
                 "GlossDiv": [
@@ -39,7 +39,7 @@ extension JSONTests {
         self.measure {
             do {
                 let jsonData = try jsonEncoder.encode(jsonValueForEncocable)
-                let jsonValueFromDecodable = try jsonDecoder.decode(JSON.self, from: jsonData)
+                let jsonValueFromDecodable = try jsonDecoder.decode(JSONValue.self, from: jsonData)
 
                 stopMeasuring()
 

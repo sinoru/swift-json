@@ -1,11 +1,11 @@
 //
-//  JSON+Conformances.swift
+//  JSONValue+Conformances.swift
 //
 //
 //  Created by Jaehong Kang on 8/17/24.
 //
 
-extension JSON: CustomStringConvertible {
+extension JSONValue: CustomStringConvertible {
     public var description: String {
         switch self {
         case .object(let object):
@@ -24,9 +24,9 @@ extension JSON: CustomStringConvertible {
     }
 }
 
-extension JSON: CustomDebugStringConvertible {
+extension JSONValue: CustomDebugStringConvertible {
     public var debugDescription: String {
-        var result = "JSON("
+        var result = "JSONValue("
 
         switch self {
         case .object(let object):

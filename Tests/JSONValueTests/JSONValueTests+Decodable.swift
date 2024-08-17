@@ -1,5 +1,5 @@
 //
-//  JSONTests+Decodable.swift
+//  JSONValueTests+Decodable.swift
 //
 //
 //  Created by Jaehong Kang on 8/12/23.
@@ -8,7 +8,7 @@
 import XCTest
 @testable import JSONValue
 
-extension JSONTests {
+extension JSONValueTests {
     func testDecodable() throws {
         let jsonString = #"""
         {
@@ -36,7 +36,7 @@ extension JSONTests {
         """#
 
         let jsonDecoder = JSONDecoder()
-        let jsonValue = try jsonDecoder.decode(JSON.self, from: Data(jsonString.utf8))
+        let jsonValue = try jsonDecoder.decode(JSONValue.self, from: Data(jsonString.utf8))
 
         XCTAssertEqual(
             jsonValue,

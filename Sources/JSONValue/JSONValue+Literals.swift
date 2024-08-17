@@ -1,11 +1,11 @@
 //
-//  JSON+Literals.swift
+//  JSONValue+Literals.swift
 //
 //
 //  Created by Jaehong Kang on 8/12/23.
 //
 
-extension JSON: ExpressibleByDictionaryLiteral {
+extension JSONValue: ExpressibleByDictionaryLiteral {
     public typealias Key = Object.Key
     public typealias Value = Object.Value
 
@@ -15,7 +15,7 @@ extension JSON: ExpressibleByDictionaryLiteral {
     }
 }
 
-extension JSON: ExpressibleByArrayLiteral {
+extension JSONValue: ExpressibleByArrayLiteral {
     public typealias ArrayLiteralElement = Array.Element
 
     @inlinable
@@ -24,7 +24,7 @@ extension JSON: ExpressibleByArrayLiteral {
     }
 }
 
-extension JSON: ExpressibleByStringLiteral {
+extension JSONValue: ExpressibleByStringLiteral {
     public typealias StringLiteralType = String.StringLiteralType
 
     @inlinable
@@ -33,7 +33,7 @@ extension JSON: ExpressibleByStringLiteral {
     }
 }
 
-extension JSON: ExpressibleByIntegerLiteral {
+extension JSONValue: ExpressibleByIntegerLiteral {
     public typealias IntegerLiteralType = Number.IntegerLiteralType
 
     @inlinable
@@ -42,7 +42,7 @@ extension JSON: ExpressibleByIntegerLiteral {
     }
 }
 
-extension JSON: ExpressibleByFloatLiteral {
+extension JSONValue: ExpressibleByFloatLiteral {
     public typealias FloatLiteralType = Number.FloatLiteralType
 
     @inlinable
@@ -51,7 +51,7 @@ extension JSON: ExpressibleByFloatLiteral {
     }
 }
 
-extension JSON: ExpressibleByBooleanLiteral {
+extension JSONValue: ExpressibleByBooleanLiteral {
     public typealias BooleanLiteralType = Bool.BooleanLiteralType
 
     @inlinable
@@ -60,7 +60,7 @@ extension JSON: ExpressibleByBooleanLiteral {
     }
 }
 
-extension JSON: ExpressibleByNilLiteral {
+extension JSONValue: ExpressibleByNilLiteral {
     @inlinable
     public init(nilLiteral: ()) {
         self = .null

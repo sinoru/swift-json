@@ -1,11 +1,11 @@
 //
-//  JSON+Decodable.swift
+//  JSONValue+Decodable.swift
 //
 //
 //  Created by Jaehong Kang on 8/12/23.
 //
 
-extension JSON: Decodable {
+extension JSONValue: Decodable {
     @inlinable
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

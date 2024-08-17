@@ -1,11 +1,11 @@
 //
-//  JSON+Subscripts.swift
+//  JSONValue+Subscripts.swift
 //
 //
 //  Created by Jaehong Kang on 8/12/23.
 //
 
-extension JSON {
+extension JSONValue {
     @inlinable
     public subscript(key: Object.Key) -> Object.Value? {
         get {

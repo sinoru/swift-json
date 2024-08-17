@@ -1,5 +1,5 @@
 //
-//  JSON.swift
+//  JSONValue.swift
 //
 //
 //  Created by Jaehong Kang on 8/12/23.
@@ -12,9 +12,9 @@
 #endif
 
 @frozen
-public enum JSON: Sendable {
-    public typealias Object = [String: JSON]
-    public typealias Array = [JSON]
+public enum JSONValue: Sendable {
+    public typealias Object = [String: JSONValue]
+    public typealias Array = [JSONValue]
     public typealias Number = Decimal
 
     case object(Object)
@@ -25,5 +25,5 @@ public enum JSON: Sendable {
     case null
 }
 
-extension JSON: Equatable { }
-extension JSON: Hashable { }
+extension JSONValue: Equatable { }
+extension JSONValue: Hashable { }

@@ -1,11 +1,11 @@
 //
-//  JSON+Encodable.swift
+//  JSONValue+Encodable.swift
 //
 //
 //  Created by Jaehong Kang on 8/12/23.
 //
 
-extension JSON: Encodable {
+extension JSONValue: Encodable {
     @inlinable
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
