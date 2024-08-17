@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import JSONValue
+@testable import JSON
 
 extension JSONValueTests {
     func testDecodable() throws {
