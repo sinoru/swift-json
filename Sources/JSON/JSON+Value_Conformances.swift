@@ -5,8 +5,8 @@
 //  Created by Jaehong Kang on 8/17/24.
 //
 
-
 extension JSON.Value: CustomStringConvertible {
+    @inlinable
     public var description: String {
         switch self {
         case .object(let object):
@@ -26,6 +26,7 @@ extension JSON.Value: CustomStringConvertible {
 }
 
 extension JSON.Value: CustomDebugStringConvertible {
+    @inlinable
     public var debugDescription: String {
         var result = "JSONValue("
 
