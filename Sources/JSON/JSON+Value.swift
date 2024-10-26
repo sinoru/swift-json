@@ -5,10 +5,12 @@
 //  Created by Jaehong Kang on 8/12/23.
 //
 
+#if !hasFeature(Embedded)
 #if canImport(FoundationEssentials)
 @_exported import struct FoundationEssentials.Decimal
 #else
 @_exported import struct Foundation.Decimal
+#endif
 #endif
 
 @frozen
@@ -20,7 +22,11 @@ extension JSON {
     /// This type represents array in JSON.
     public typealias Array = Swift.Array<Value>
     /// This type represents number in JSON.
+    #if !hasFeature(Embedded)
     public typealias Number = Decimal
+    #else
+    public typealias Number = Double
+    #endif
 
     /// This type represents value in JSON, which can be as a single JSON value, can be used in JSON array, or can be used as JSON object value.
     @frozen

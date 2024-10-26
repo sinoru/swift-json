@@ -5,8 +5,7 @@
 //  Created by Jaehong Kang on 8/12/23.
 //
 
-import Foundation
-
+@_unavailableInEmbedded
 extension JSON.Value: Decodable {
     @inlinable
     public init(from decoder: Decoder) throws {

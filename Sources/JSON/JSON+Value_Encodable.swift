@@ -5,6 +5,7 @@
 //  Created by Jaehong Kang on 8/12/23.
 //
 
+@_unavailableInEmbedded
 extension JSON.Value: Encodable {
     @inlinable
     public func encode(to encoder: Encoder) throws {

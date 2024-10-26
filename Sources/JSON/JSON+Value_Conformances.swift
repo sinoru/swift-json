@@ -25,6 +25,7 @@ extension JSON.Value: CustomStringConvertible {
     }
 }
 
+@_unavailableInEmbedded
 extension JSON.Value: CustomDebugStringConvertible {
     @inlinable
     public var debugDescription: String {
