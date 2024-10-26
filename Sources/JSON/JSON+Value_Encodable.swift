@@ -22,8 +22,6 @@ extension JSON.Value: Encodable {
             try container.encode(number)
         case .bool(let bool):
             try container.encode(bool)
-        case .null:
-            try container.encodeNil()
         }
     }
 }

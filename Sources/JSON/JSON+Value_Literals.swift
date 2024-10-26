@@ -59,10 +59,3 @@ extension JSON.Value: ExpressibleByBooleanLiteral {
         self = .bool(.init(booleanLiteral: value))
     }
 }
-
-extension JSON.Value: ExpressibleByNilLiteral {
-    @inlinable
-    public init(nilLiteral: ()) {
-        self = .null
-    }
-}

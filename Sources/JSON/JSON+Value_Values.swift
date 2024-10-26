@@ -99,22 +99,3 @@ extension JSON.Value {
         }
     }
 }
-
-extension JSON.Value {
-    @inlinable
-    public var isNull: Bool {
-        get {
-            switch self {
-            case .null:
-                return true
-            default:
-                return false
-            }
-        }
-        set {
-            if newValue {
-                self = .null
-            }
-        }
-    }
-}

@@ -18,9 +18,9 @@ public enum JSON { }
 
 extension JSON {
     /// This type represents object in JSON.
-    public typealias Object = Dictionary<String, Value>
+    public typealias Object = Dictionary<String, Value?>
     /// This type represents array in JSON.
-    public typealias Array = Swift.Array<Value>
+    public typealias Array = Swift.Array<Value?>
     /// This type represents number in JSON.
     #if !hasFeature(Embedded)
     public typealias Number = Decimal
@@ -29,7 +29,6 @@ extension JSON {
     #endif
 
     /// This type represents value in JSON, which can be as a single JSON value, can be used in JSON array, or can be used as JSON object value.
-    @frozen
     public enum Value: Sendable, Equatable, Hashable {
         /// The value is object which is in associated value.
         case object(Object)
@@ -41,7 +40,5 @@ extension JSON {
         case number(Number)
         /// The value is bool which is in associated value.
         case bool(Bool)
-        /// The value is null.
-        case null
     }
 }
