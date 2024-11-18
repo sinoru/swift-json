@@ -58,6 +58,11 @@ extension JSON.Value: Decodable {
             errors.append(error)
         }
 
+        if container.decodeNil() {
+            self = .null
+            return
+        }
+
         throw DecodingError.dataCorrupted(.init(codingPath: decoder.codingPath, debugDescription: errors.debugDescription, underlyingError: errors.last))
     }
 }

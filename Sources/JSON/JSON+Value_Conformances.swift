@@ -19,6 +19,8 @@ extension JSON.Value: CustomStringConvertible {
             return number.description
         case .bool(let bool):
             return bool.description
+        case .null:
+            return "null"
         }
     }
 }
@@ -40,6 +42,8 @@ extension JSON.Value: CustomDebugStringConvertible {
             debugPrint(number, terminator: "", to: &result)
         case .bool(let bool):
             debugPrint(bool, terminator: "", to: &result)
+        case .null:
+            print(self, terminator: "", to: &result)
         }
 
         result += ")"
