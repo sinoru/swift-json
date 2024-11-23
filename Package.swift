@@ -18,9 +18,15 @@ let package = Package(
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "JSON"),
+            name: "JSON",
+            dependencies: ["JSONNumber"]),
+        .target(
+            name: "JSONNumber"),
         .testTarget(
             name: "JSONTests",
             dependencies: ["JSON"]),
+        .testTarget(
+            name: "JSONNumberTests",
+            dependencies: ["JSONNumber"]),
     ]
 )

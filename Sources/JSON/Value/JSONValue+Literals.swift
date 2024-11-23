@@ -5,6 +5,8 @@
 //  Created by Jaehong Kang on 8/12/23.
 //
 
+import JSONNumber
+
 extension JSON.Value: ExpressibleByDictionaryLiteral {
     public typealias Key = JSON.Object.Key
     public typealias Value = JSON.Object.Value

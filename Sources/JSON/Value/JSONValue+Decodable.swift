@@ -5,6 +5,8 @@
 //  Created by Jaehong Kang on 8/12/23.
 //
 
+import JSONNumber
+
 @_unavailableInEmbedded
 extension JSON.Value: Decodable {
     @inlinable

@@ -5,6 +5,8 @@
 //  Created by Jaehong Kang on 8/17/24.
 //
 
+import JSONNumber
+
 extension JSON.Value: CustomStringConvertible {
     @inlinable
     public var description: String {
