@@ -10,6 +10,9 @@ let package = Package(
         .library(
             name: "JSON",
             targets: ["JSON"]),
+        .library(
+            name: "JSONValueCoder",
+            targets: ["JSONValueCoder"]),
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0"),
@@ -22,6 +25,8 @@ let package = Package(
             dependencies: ["JSONNumber"]),
         .target(
             name: "JSONNumber"),
+        .target(name: "JSONValueCoder",
+            dependencies: ["JSON"]),
         .testTarget(
             name: "JSONTests",
             dependencies: ["JSON"]),
