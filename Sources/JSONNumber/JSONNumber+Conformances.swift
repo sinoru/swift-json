@@ -5,30 +5,16 @@
 //  Created by Jaehong Kang on 11/19/24.
 //
 
-#if canImport(FoundationEssentials)
-@_exported import struct FoundationEssentials.Decimal
-#elseif canImport(Foundation)
-@_exported import struct Foundation.Decimal
-#endif
-
 extension JSONNumber: Equatable {
     public static func == (lhs: JSONNumber, rhs: JSONNumber) -> Bool {
-        #if canImport(Foundation)
-        switch (lhs.storage.mantissa, rhs.storage.mantissa) {
-        case (.decimal, _), (_, .decimal):
-            return lhs.decimal == rhs.decimal
-        case (.fraction, .fraction):
-            return lhs.double == rhs.double
-        }
-        #else
-        lhs.double == rhs.double
-        #endif
+        lhs.significand == rhs.significand && lhs.exponent == rhs.exponent
     }
 }
 
 extension JSONNumber: Hashable {
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(double)
+        hasher.combine(significand)
+        hasher.combine(exponent)
     }
 }
 
@@ -44,10 +30,10 @@ extension JSONNumber: CustomStringConvertible {
 }
 
 extension JSONNumber: ExpressibleByIntegerLiteral {
-    public typealias IntegerLiteralType = Int64
+    public typealias IntegerLiteralType = Int128
 
     public init(integerLiteral value: IntegerLiteralType) {
-        self.init(significand: value, fraction: 0)
+        self.init(significand: value, exponent: 0)
     }
 }
 
@@ -59,9 +45,11 @@ extension JSONNumber: ExpressibleByFloatLiteral {
     #endif
 
     public init(floatLiteral value: FloatLiteralType) {
-        let significand = Int(value.rounded(.down))
-
-        self.init(significand: .init(value.rounded(.down)), fraction: value - Double(significand))
+        #if canImport(Foundation)
+        self.init(Decimal(floatLiteral: value))
+        #else
+        self.init(Double(value))
+        #endif
     }
 }
 

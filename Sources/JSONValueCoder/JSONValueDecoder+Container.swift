@@ -83,7 +83,52 @@ extension JSONValueDecoder.Container {
                 debugDescription: "Expected to decode \(type) but found \(jsonValue.debugDataTypeDescription) instead."
             ))
         case .number(let number):
-            return number.significand
+            if number.exponent >= 0 {
+                var result = number.significand
+                for _ in 0..<number.exponent {
+                    let (newResult, overflow) = result.multipliedReportingOverflow(by: 10)
+                    guard !overflow else {
+                        throw DecodingError.dataCorrupted(DecodingError.Context(
+                            codingPath: self.codingPath,
+                            debugDescription: "Number \(number) overflows Int64"
+                        ))
+                    }
+                    result = newResult
+                }
+                guard let int64Result = Int64(exactly: result) else {
+                    throw DecodingError.dataCorrupted(DecodingError.Context(
+                        codingPath: self.codingPath,
+                        debugDescription: "Number \(number) overflows Int64"
+                    ))
+                }
+                return int64Result
+            } else {
+                var divisor: Int128 = 1
+                for _ in 0..<(-number.exponent) {
+                    let (newDivisor, overflow) = divisor.multipliedReportingOverflow(by: 10)
+                    guard !overflow else {
+                        throw DecodingError.dataCorrupted(DecodingError.Context(
+                            codingPath: self.codingPath,
+                            debugDescription: "Number \(number) is not an integer"
+                        ))
+                    }
+                    divisor = newDivisor
+                }
+                guard number.significand % divisor == 0 else {
+                    throw DecodingError.dataCorrupted(DecodingError.Context(
+                        codingPath: self.codingPath,
+                        debugDescription: "Number \(number) is not an integer"
+                    ))
+                }
+                let result = number.significand / divisor
+                guard let int64Result = Int64(exactly: result) else {
+                    throw DecodingError.dataCorrupted(DecodingError.Context(
+                        codingPath: self.codingPath,
+                        debugDescription: "Number \(number) overflows Int64"
+                    ))
+                }
+                return int64Result
+            }
         case .null:
             throw DecodingError.valueNotFound(type, DecodingError.Context(
                 codingPath: self.codingPath,

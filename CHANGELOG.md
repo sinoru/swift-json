@@ -14,8 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `null` case to `JSON.Value`
 - Swift 6 support
 - Swift 6.2 strict memory safety support
+- Arithmetic protocol conformances for `JSONNumber` (`Comparable`, `AdditiveArithmetic`, `Numeric`, `SignedNumeric`)
+- Platform requirements (macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2)
 
 ### Changed
+- Upgrade `JSONNumber` significand from `Int64` to `Int128` for ~38-digit precision
+- Simplify `Decimal` conversion by removing `Double` fallback path
 - Restructured `JSON.Value` to use `JSONNumber` instead of raw numeric types
 
 ### Fixed
