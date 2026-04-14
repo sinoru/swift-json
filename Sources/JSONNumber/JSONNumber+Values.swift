@@ -14,12 +14,8 @@ import Musl
 #endif
 
 extension JSONNumber {
-    public var double: Double {
-        Double(significand) * pow(10.0, Double(exponent))
-    }
-
     public var fraction: Double {
-        double.truncatingRemainder(dividingBy: 1.0)
+        Double(self).magnitude.truncatingRemainder(dividingBy: 1.0)
     }
 
     public init(_ value: Double) {
@@ -35,5 +31,11 @@ extension JSONNumber {
         } else {
             self.init(significand: Int128(value), exponent: 0)
         }
+    }
+}
+
+extension Double {
+    public init(_ value: JSONNumber) {
+        self = Double(value.significand) * pow(10.0, Double(value.exponent))
     }
 }

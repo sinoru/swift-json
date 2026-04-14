@@ -22,7 +22,7 @@ extension JSONNumber: CustomStringConvertible {
     @inlinable
     public var description: String {
         #if canImport(Foundation)
-        decimal.description
+        Decimal(self).description
         #else
         double.description
         #endif
@@ -74,7 +74,7 @@ extension JSONNumber: Encodable {
         var container = encoder.singleValueContainer()
 
         #if canImport(Foundation)
-        try container.encode(decimal)
+        try container.encode(Decimal(self))
         #else
         try container.encode(double)
         #endif

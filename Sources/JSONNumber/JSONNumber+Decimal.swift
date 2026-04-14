@@ -13,16 +13,6 @@
 
 #if canImport(Foundation)
 extension JSONNumber {
-    public var decimal: Decimal {
-        let sign: FloatingPointSign = significand >= 0 ? .plus : .minus
-
-        return Decimal(
-            sign: sign,
-            exponent: exponent,
-            significand: Decimal(string: significand.magnitude.description) ?? 0
-        )
-    }
-
     public init(_ value: Decimal) {
         guard !value.isZero else {
             self.init(significand: 0, exponent: 0)
@@ -42,6 +32,18 @@ extension JSONNumber {
         let mag = Int128(significandString)!
         let signed: Int128 = value.sign == .minus ? -mag : mag
         self.init(significand: signed, exponent: value.exponent + exponentAdjust)
+    }
+}
+
+extension Decimal {
+    public init(_ value: JSONNumber) {
+        let sign: FloatingPointSign = value.significand >= 0 ? .plus : .minus
+
+        self.init(
+            sign: sign,
+            exponent: value.exponent,
+            significand: Decimal(string: value.significand.magnitude.description) ?? 0
+        )
     }
 }
 #endif

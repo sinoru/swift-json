@@ -66,7 +66,7 @@ extension JSONValueDecoder.Container {
                 debugDescription: "Expected to decode \(type) but found \(jsonValue.debugDataTypeDescription) instead."
             ))
         case .number(let number):
-            return number.double
+            return Double(number)
         case .null:
             throw DecodingError.valueNotFound(type, DecodingError.Context(
                 codingPath: self.codingPath,

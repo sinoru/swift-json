@@ -17,21 +17,21 @@ struct JSONNumberTest {
 
         let jsonNumber = JSONNumber(decimal)
 
-        #expect(jsonNumber.decimal == decimal)
+        #expect(Decimal(jsonNumber) == decimal)
     }
 
     @Test
     func negativeDecimal() async throws {
         let decimal = Decimal(string: "-45.67")!
         let number = JSONNumber(decimal)
-        #expect(number.decimal == decimal)
+        #expect(Decimal(number) == decimal)
     }
 
     @Test
     func exponentDecimal() async throws {
         let decimal = Decimal(sign: .plus, exponent: 5, significand: 3)
         let number = JSONNumber(decimal)
-        #expect(number.decimal == decimal)
+        #expect(Decimal(number) == decimal)
     }
 
     // MARK: - Double conversion
@@ -42,13 +42,13 @@ struct JSONNumberTest {
 
         let jsonNumber = JSONNumber(double)
 
-        #expect(jsonNumber.double == double)
+        #expect(Double(jsonNumber) == double)
     }
 
     @Test
     func negativeDouble() async throws {
         let number = JSONNumber(-3.5)
-        #expect(number.double == -3.5)
+        #expect(Double(number) == -3.5)
     }
 
     // MARK: - Basic properties
@@ -56,7 +56,7 @@ struct JSONNumberTest {
     @Test
     func integerRoundTrip() async throws {
         let number = JSONNumber(significand: 42, exponent: 0)
-        #expect(number.double == 42.0)
+        #expect(Double(number) == 42.0)
         #expect(number.significand == 42)
         #expect(number.exponent == 0)
     }
@@ -64,7 +64,7 @@ struct JSONNumberTest {
     @Test
     func largeExponent() async throws {
         let number = JSONNumber(significand: 1, exponent: 100)
-        #expect(number.double == 1e100)
+        #expect(Double(number) == 1e100)
     }
 
     @Test
@@ -73,7 +73,7 @@ struct JSONNumberTest {
         #expect(abs(positive.fraction - 0.14) < 1e-10)
 
         let negative = JSONNumber(-3.5)
-        #expect(abs(negative.fraction - (-0.5)) < 1e-10)
+        #expect(abs(negative.fraction - (0.5)) < 1e-10)
     }
 
     // MARK: - Normalization

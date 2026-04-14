@@ -20,6 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Upgrade `JSONNumber` significand from `Int64` to `Int128` for ~38-digit precision
 - Simplify `Decimal` conversion by removing `Double` fallback path
+- Replace `JSONNumber.double`/`.decimal` properties with `Double.init(_:JSONNumber)`/`Decimal.init(_:JSONNumber)` initializers
+- `JSONNumber.fraction` now returns absolute value (uses `.magnitude`)
 - Restructured `JSON.Value` to use `JSONNumber` instead of raw numeric types
 
 ### Fixed
