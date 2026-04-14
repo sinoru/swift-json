@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Restructured `JSON.Value` to use `JSONNumber` instead of raw numeric types
 
 ### Fixed
+- Value property setters now reset to null when assigned `nil`
 - Wrong target name
 
 ## [0.1.1] - 2024-08-17
