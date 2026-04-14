@@ -96,7 +96,7 @@ extension JSONValueDecoder.Container {
         switch type {
         case is URL.Type:
             let string = try decode(jsonValue: jsonValue, for: String.self)
-            return unsafeBitCast(URL(string: string), to: D.self)
+            return unsafe unsafeBitCast(URL(string: string), to: D.self)
         default:
             return try D(from: JSON.ValueDecoder._Decoder(jsonValue: jsonValue, codingPath: codingPath, userInfo: decoder.userInfo))
         }
