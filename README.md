@@ -25,7 +25,7 @@ Add the dependency to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/sinoru/swift-json.git", from: "0.1.1"),
+    .package(url: "https://github.com/sinoru/swift-json.git", from: "0.2.0"),
 ]
 ```
 
