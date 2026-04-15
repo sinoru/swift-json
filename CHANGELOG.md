@@ -7,30 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-04-15
+
 ### Added
-- `JSONNumber` type for representing JSON numbers with decimal precision
+- `JSONNumber` type with `Int128`-backed ~38-digit decimal precision
+- Arithmetic protocol conformances for `JSONNumber` (`Comparable`, `AdditiveArithmetic`, `Numeric`, `SignedNumeric`)
+- `Double.init(_:JSONNumber)` and `Decimal.init(_:JSONNumber)` initializers
 - `JSONValueDecoder` for decoding `JSON.Value` into `Decodable` types
 - `JSONValueCoder` module
 - `null` case to `JSON.Value`
 - Swift 6 support
 - Swift 6.2 strict memory safety support
-- Arithmetic protocol conformances for `JSONNumber` (`Comparable`, `AdditiveArithmetic`, `Numeric`, `SignedNumeric`)
 - Platform requirements (macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2)
 
 ### Changed
-- Upgrade `JSONNumber` significand from `Int64` to `Int128` for ~38-digit precision
-- Simplify `Decimal` conversion by removing `Double` fallback path
-- Replace `JSONNumber.double`/`.decimal` properties with `Double.init(_:JSONNumber)`/`Decimal.init(_:JSONNumber)` initializers
-- `JSONNumber.fraction` now returns absolute value (uses `.magnitude`)
 - Restructured `JSON.Value` to use `JSONNumber` instead of raw numeric types
 
 ### Fixed
-- `UnkeyedContainer.decodeNil()` no longer advances index when value is not null, conforming to `UnkeyedDecodingContainer` protocol contract
-- `UnkeyedContainer.decode<T>` now reports correct index in coding path (off-by-one fix)
-- Replace `unsafeBitCast` with safe cast in URL decoding and throw `DecodingError.dataCorrupted` for invalid URL strings
-- Improve `CodingPath.keys` from O(n²) to O(n) time complexity
 - Value property setters now reset to null when assigned `nil`
-- Wrong target name
 
 ## [0.1.1] - 2024-08-17
 
@@ -80,7 +74,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Read-only subscript access
 - CI test workflow
 
-[Unreleased]: https://github.com/sinoru/swift-json/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/sinoru/swift-json/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/sinoru/swift-json/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/sinoru/swift-json/compare/v0.0.5...v0.1.1
 [0.0.5]: https://github.com/sinoru/swift-json/compare/v0.0.4...v0.0.5
 [0.0.4]: https://github.com/sinoru/swift-json/compare/v0.0.3...v0.0.4
