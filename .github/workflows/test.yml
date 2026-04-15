@@ -2,61 +2,70 @@ name: Test
 
 on:
   push:
-    paths:
-      - '.github/workflows/test.yml'
-      - '**/*.swift'
+    branches: [main, develop, 'release/*', 'hotfix/*', 'support/*']
   pull_request:
-    paths:
-      - '.github/workflows/test.yml'
-      - '**/*.swift'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  swift-test:
+  test:
+    name: Swift ${{ matrix.swift-version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
     strategy:
+      fail-fast: false
       matrix:
-        operating-system: ['macos-12', 'macos-13', 'macos-14', 'ubuntu-20.04', 'ubuntu-22.04']
-        swift-version: ['5.6.3', '5.7.3', '5.8.1', '5.9.2', '5.10.1']
-        experimental: [null]
-        include:
-          - operating-system: 'ubuntu-24.04'
-            swift-version: '5.10.1'
+        os: [ubuntu-22.04, ubuntu-24.04, macos-26]
+        swift-version: ['6.0', '6.1', '6.2', '6.3']
         exclude:
-          - operating-system: 'macos-12'
-            swift-version: '5.6.3'
-          - operating-system: 'macos-13'
-            swift-version: '5.6.3'
-          - operating-system: 'macos-13'
-            swift-version: '5.7.3'
-          - operating-system: 'macos-13'
-            swift-version: '5.8.1'
-          - operating-system: 'macos-14'
-            swift-version: '5.6.3'
-          - operating-system: 'macos-14'
-            swift-version: '5.7.3'
-          - operating-system: 'macos-14'
-            swift-version: '5.8.1'
-          - operating-system: 'ubuntu-22.04'
-            swift-version: '5.6.3'
-    runs-on: ${{ matrix.operating-system }}
-    continue-on-error: ${{ matrix.experimental == 'experimental' }}
+          - os: macos-26
+            swift-version: '6.0'
+          - os: macos-26
+            swift-version: '6.1'
     steps:
       - uses: actions/checkout@v4
-      - uses: swift-actions/setup-swift@v2
-        with:
-          swift-version: ${{ matrix.swift-version }}
-      - name: Package resolve
-        run: swift package resolve
+
+      - name: Install swiftly and Swift (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          curl -L https://download.swift.org/swiftly/linux/swiftly-$(uname -m).tar.gz > swiftly.tar.gz
+          tar zxf swiftly.tar.gz
+          ./swiftly init --assume-yes --skip-install
+          . "${SWIFTLY_HOME_DIR:-$HOME/.local/share/swiftly}/env.sh"
+          hash -r
+          swiftly install ${{ matrix.swift-version }} --post-install-file=post-install.sh
+          if [ -f post-install.sh ]; then
+            sudo bash post-install.sh
+          fi
+          echo "PATH=$PATH" >> "$GITHUB_ENV"
+
+      - name: Install swiftly and Swift (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          curl -L https://download.swift.org/swiftly/darwin/swiftly.pkg > swiftly.pkg
+          installer -pkg swiftly.pkg -target CurrentUserHomeDirectory
+          ~/.swiftly/bin/swiftly init --assume-yes --skip-install
+          . "${SWIFTLY_HOME_DIR:-$HOME/.swiftly}/env.sh"
+          hash -r
+          swiftly install ${{ matrix.swift-version }} --post-install-file=post-install.sh
+          if [ -f post-install.sh ]; then
+            . post-install.sh
+          fi
+          echo "PATH=$PATH" >> "$GITHUB_ENV"
+
+      - name: Swift version
+        run: swift --version
+
+      - name: Resolve dependencies
+        run: swift package resolve ${RUNNER_DEBUG:+-v}
+
       - name: Build
-        run: |
-          if [ -z "$RUNNER_DEBUG" ]; then
-            swift build
-          else
-            swift build -v
-          fi
-      - name: Run tests
-        run: |
-          if [ -z "$RUNNER_DEBUG" ]; then
-            swift test
-          else
-            swift test -v
-          fi
+        run: swift build ${RUNNER_DEBUG:+-v}
+
+      - name: Test
+        run: swift test ${RUNNER_DEBUG:+-v}

@@ -5,25 +5,18 @@
 //  Created by Jaehong Kang on 8/12/23.
 //
 
+#if !hasFeature(Embedded)
 #if canImport(FoundationEssentials)
 @_exported import struct FoundationEssentials.Decimal
 #else
 @_exported import struct Foundation.Decimal
 #endif
+#endif
 
-@frozen
-public enum JSON { }
+import JSONNumber
 
 extension JSON {
-    /// This type represents object in JSON.
-    public typealias Object = Dictionary<String, Value>
-    /// This type represents array in JSON.
-    public typealias Array = Swift.Array<Value>
-    /// This type represents number in JSON.
-    public typealias Number = Decimal
-
     /// This type represents value in JSON, which can be as a single JSON value, can be used in JSON array, or can be used as JSON object value.
-    @frozen
     public enum Value: Sendable, Equatable, Hashable {
         /// The value is object which is in associated value.
         case object(Object)

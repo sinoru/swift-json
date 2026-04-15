@@ -19,6 +19,8 @@ extension JSON.Value {
         set {
             if let newValue = newValue {
                 self = .object(newValue)
+            } else {
+                self = nil
             }
         }
     }
@@ -38,6 +40,8 @@ extension JSON.Value {
         set {
             if let newValue = newValue {
                 self = .array(newValue)
+            } else {
+                self = nil
             }
         }
     }
@@ -57,6 +61,8 @@ extension JSON.Value {
         set {
             if let newValue = newValue {
                 self = .string(newValue)
+            } else {
+                self = nil
             }
         }
     }
@@ -76,6 +82,8 @@ extension JSON.Value {
         set {
             if let newValue = newValue {
                 self = .number(newValue)
+            } else {
+                self = nil
             }
         }
     }
@@ -95,25 +103,8 @@ extension JSON.Value {
         set {
             if let newValue = newValue {
                 self = .bool(newValue)
-            }
-        }
-    }
-}
-
-extension JSON.Value {
-    @inlinable
-    public var isNull: Bool {
-        get {
-            switch self {
-            case .null:
-                return true
-            default:
-                return false
-            }
-        }
-        set {
-            if newValue {
-                self = .null
+            } else {
+                self = nil
             }
         }
     }

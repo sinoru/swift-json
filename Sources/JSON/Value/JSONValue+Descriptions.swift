@@ -5,6 +5,8 @@
 //  Created by Jaehong Kang on 8/17/24.
 //
 
+import JSONNumber
+
 extension JSON.Value: CustomStringConvertible {
     @inlinable
     public var description: String {
@@ -20,11 +22,12 @@ extension JSON.Value: CustomStringConvertible {
         case .bool(let bool):
             return bool.description
         case .null:
-            return ""
+            return "null"
         }
     }
 }
 
+@_unavailableInEmbedded
 extension JSON.Value: CustomDebugStringConvertible {
     @inlinable
     public var debugDescription: String {
@@ -42,7 +45,7 @@ extension JSON.Value: CustomDebugStringConvertible {
         case .bool(let bool):
             debugPrint(bool, terminator: "", to: &result)
         case .null:
-            return "nil"
+            print(self, terminator: "", to: &result)
         }
 
         result += ")"

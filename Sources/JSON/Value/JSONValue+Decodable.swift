@@ -5,8 +5,9 @@
 //  Created by Jaehong Kang on 8/12/23.
 //
 
-import Foundation
+import JSONNumber
 
+@_unavailableInEmbedded
 extension JSON.Value: Decodable {
     @inlinable
     public init(from decoder: Decoder) throws {
@@ -61,8 +62,9 @@ extension JSON.Value: Decodable {
 
         if container.decodeNil() {
             self = .null
-        } else {
-            throw DecodingError.dataCorrupted(.init(codingPath: decoder.codingPath, debugDescription: errors.debugDescription, underlyingError: errors.last))
+            return
         }
+
+        throw DecodingError.dataCorrupted(.init(codingPath: decoder.codingPath, debugDescription: errors.debugDescription, underlyingError: errors.last))
     }
 }
