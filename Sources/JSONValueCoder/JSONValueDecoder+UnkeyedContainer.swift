@@ -32,7 +32,12 @@ extension JSONValueDecoder {
         }
 
         mutating func decodeNil() throws -> Bool {
-            decodeNil(from: next())
+            let jsonValue = jsonArray[currentIndex]
+            if decodeNil(from: jsonValue) {
+                currentIndex += 1
+                return true
+            }
+            return false
         }
 
         mutating func decode(_ type: Bool.Type) throws -> Bool {
@@ -92,7 +97,8 @@ extension JSONValueDecoder {
         }
 
         mutating func decode<T>(_ type: T.Type) throws -> T where T : Decodable {
-            try decode(jsonValue: next(), for: type, with: _codingPath.appending(index: currentIndex))
+            let currentIndex = currentIndex
+            return try decode(jsonValue: next(), for: type, with: _codingPath.appending(index: currentIndex))
         }
 
         mutating func nestedContainer<NestedKey>(keyedBy type: NestedKey.Type) throws -> KeyedDecodingContainer<NestedKey> where NestedKey : CodingKey {

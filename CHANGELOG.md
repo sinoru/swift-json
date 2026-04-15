@@ -25,6 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Restructured `JSON.Value` to use `JSONNumber` instead of raw numeric types
 
 ### Fixed
+- `UnkeyedContainer.decodeNil()` no longer advances index when value is not null, conforming to `UnkeyedDecodingContainer` protocol contract
+- `UnkeyedContainer.decode<T>` now reports correct index in coding path (off-by-one fix)
+- Replace `unsafeBitCast` with safe cast in URL decoding and throw `DecodingError.dataCorrupted` for invalid URL strings
+- Improve `CodingPath.keys` from O(n²) to O(n) time complexity
 - Value property setters now reset to null when assigned `nil`
 - Wrong target name
 

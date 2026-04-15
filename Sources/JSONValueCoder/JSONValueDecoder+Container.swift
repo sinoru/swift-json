@@ -141,7 +141,13 @@ extension JSONValueDecoder.Container {
         switch type {
         case is URL.Type:
             let string = try decode(jsonValue: jsonValue, for: String.self)
-            return unsafeBitCast(URL(string: string), to: D.self)
+            guard let url = URL(string: string) else {
+                throw DecodingError.dataCorrupted(DecodingError.Context(
+                    codingPath: codingPath.keys,
+                    debugDescription: "Invalid URL string."
+                ))
+            }
+            return url as! D
         default:
             return try D(from: JSON.ValueDecoder._Decoder(jsonValue: jsonValue, codingPath: codingPath, userInfo: decoder.userInfo))
         }

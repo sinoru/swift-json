@@ -42,13 +42,22 @@ enum SimpleCodingKey: CodingKey {
 
 extension CodingPath {
     var keys: [CodingKey] {
+        var result = [CodingKey]()
+        result.reserveCapacity(depth)
+        collectKeys(into: &result)
+        return result
+    }
+
+    private func collectKeys(into result: inout [CodingKey]) {
         switch self {
         case .root:
-            return []
+            break
         case let .keyNode(key, parent, _):
-            return parent.keys + [key]
+            parent.collectKeys(into: &result)
+            result.append(key)
         case let .indexNode(index, parent, _):
-            return parent.keys + [SimpleCodingKey.int(index)]
+            parent.collectKeys(into: &result)
+            result.append(SimpleCodingKey.int(index))
         }
     }
 
